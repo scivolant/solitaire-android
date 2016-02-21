@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Пасианс</string>
+
+    <!-- score -->
+    <string name="score_moves">Ходове</string>
+    <string name="score_time">Време</string>
+    <string name="score_points">Точки</string>
+    <string name="score_best">Рекорд</string>
+
+    <!-- menus -->
+    <string name="menu_deal">Игра</string>
+    <string name="menu_new">Нова игра</string>
+    <string name="menu_replay">Отначало</string>
+    <string name="menu_undo">Назад</string>
+    <string name="menu_auto_finish">Довърши</string>
+    <string name="menu_title_actions">Игра</string>
+    <string name="menu_title_game_mode">Превъртане на картите</string>
+    <string name="menu_draw1">По 1 карта (лесно)</string>
+    <string name="menu_draw3">По 3 карти (трудно)</string>
+
+    <!-- total stats -->
+    <string name="stats_title">С Т А Т И С Т И К А</string>
+    <string name="stats_points">Точки:</string>
+    <string name="best_points">Макс. точки</string>
+    <string name="best_moves">Най-малко ходове</string>
+    <string name="best_time">Най-добро време</string>
+    <string name="total_moves">Общо ходове:</string>
+    <string name="total_games">Изиграни игри</string>
+    <string name="total_time">Общо време:</string>
+    <string name="win">Спечелени</string>
+    <string name="lost">Загубени</string>
+    <string name="deals">Изиграни:</string>
+
+    <!-- game stats -->
+    <string name="game_stats_title">П О Б Е Д А!</string>
+    <string name="moves">Ходове:</string>
+    <string name="time">Време:</string>
+
+    <!-- hints -->
+    <string name="hint0_title">Добре дошли!</string>
+    <string name="hint0_text">Докоснете някъде фона,\nза да отворите менюто.</string>
+    <string name="hint1_title">Авт. довършване</string>
+    <string name="hint1_text">Чрез знамето можете да\nдовършите и спечелите\nиграта автоматично.</string>
+    <string name="hint2_title">Назад</string>
+    <string name="hint2_text">Използвайте стрелката,\nако искате да върнете\nпоследния ход.</string>
+    <string name="close">Затвори</string>
+
+    <!-- settings -->
+    <string name="settings_gamebg">Фон на играта</string>
+    <string name="settings_cardbg">Гръб на картите</string>
+    <string name="settings_select_picture">Избери картинка</string>
+    <string name="settings_full_screen_title">Пълен екран</string>
+    <string name="settings_showing_status_bar">Показва статус лента (по-малки карти)</string>
+    <string name="settings_using_full_screen">Показва на пълен екран (големи карти)</string>
+    <string name="settings_using_default">Използва се фабрична картинка</string>
+    <string name="settings_using_selected_image">Използва се избраната картинка</string>
+    <string name="settings_custom_cardbg">Промени гърба на картите</string>
+    <string name="settings_custom_gamebg">Промени фона на играта</string>
+    <string name="settings_left_hand_off">Тестето с карти е отдясно</string>
+    <string name="settings_left_hand_on">Тестето с карти е отляво</string>
+    <string name="settings_left_hand_title">Игра с лява ръка</string>
+    <string name="settings_draw_three_off">Превъртане по една карта</string>
+    <string name="settings_draw_three_on">Превъртане по три карти</string>
+    <string name="settings_draw_three_title">Превъртане</string>
+
+    <!-- AppRater -->
+    <string name="app_rater_title">Оценете ни</string>
+    <string name="app_rater_explanation">Харесва ли ви играта? Ще сме ви благодарни, ако ни оцените в Google Play. Благодарим за подкрепата!</string>
+    <string name="app_rater_button_now">Оцени</string>
+    <string name="app_rater_button_later">По-късно</string>
+    <string name="app_rater_button_never">Не, благодаря</string>
+
+</resources>

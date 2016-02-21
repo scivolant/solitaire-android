@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_launcher" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TableRow>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="10dp" />
+
+            <Space
+                android:layout_width="150dp"
+                android:layout_height="0dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="@string/best_points" />
+
+            <TextView
+                android:id="@+id/bestScore"
+                android:layout_gravity="right"
+                android:gravity="right" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="@string/best_time" />
+
+            <TextView
+                android:id="@+id/bestTime"
+                android:layout_gravity="right"
+                android:gravity="right" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="@string/best_moves" />
+
+            <TextView
+                android:id="@+id/bestMoves"
+                android:layout_gravity="right"
+                android:gravity="right" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="@string/total_games" />
+
+            <TextView
+                android:id="@+id/totalGames"
+                android:layout_gravity="right"
+                android:gravity="right" />
+        </TableRow>
+    </TableLayout>
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/win" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="@string/lost" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/winLossProgress"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progress="70"
+        android:progressDrawable="@drawable/win_ratio_progress_drawable" />
+
+    <TextView
+        android:id="@+id/gamesWonPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100%" />
+
+</LinearLayout>

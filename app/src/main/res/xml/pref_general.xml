@@ -1,0 +1,26 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/pref_full_screen"
+        android:summaryOff="@string/settings_showing_status_bar"
+        android:summaryOn="@string/settings_using_full_screen"
+        android:title="@string/settings_full_screen_title" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_left_hand"
+        android:summaryOff="@string/settings_left_hand_off"
+        android:summaryOn="@string/settings_left_hand_on"
+        android:title="@string/settings_left_hand_title" />
+
+    <!-- 
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_draw_three"
+        android:summaryOff="@string/settings_draw_three_off"
+        android:summaryOn="@string/settings_draw_three_on"
+        android:title="@string/settings_draw_three_title" />
+     -->
+
+</PreferenceScreen>

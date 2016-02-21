@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Solitär</string>
+
+    <!-- score -->
+    <string name="score_moves">Züge</string>
+    <string name="score_time">Zeit</string>
+    <string name="score_points">Punkte</string>
+    <string name="score_best">Best</string>
+
+    <!-- menus -->
+    <string name="menu_deal">Spiel</string>
+    <string name="menu_new">Neues Spiel</string>
+    <string name="menu_replay">Erneut</string>
+    <string name="menu_undo">Zurück</string>
+    <string name="menu_auto_finish">Abschließen</string>
+    <string name="menu_title_actions">Aktionen</string>
+    <string name="menu_title_game_mode">Karten umdrehen</string>
+    <string name="menu_draw1">1 umdrehen (leicht)</string>
+    <string name="menu_draw3">3 umdrehen (schwer)</string>
+
+    <!-- total stats -->
+    <string name="stats_title">S T A T I S T I K:</string>
+    <string name="stats_points">Punkte:</string>
+    <string name="best_points">Beste Punkte</string>
+    <string name="best_moves">Wenigste Züge</string>
+    <string name="best_time">Beste Zeit</string>
+    <string name="total_moves">Züge gesamt:</string>
+    <string name="total_games">Gespielte Spiele</string>
+    <string name="total_time">Zeit gesamt:</string>
+    <string name="win">Gewonnen</string>
+    <string name="lost">Verloren</string>
+    <string name="deals">Spiele:</string>
+
+    <!-- game stats -->
+    <string name="game_stats_title">G E W O N N E N!</string>
+    <string name="moves">Züge:</string>
+    <string name="time">Zeit:</string>
+
+    <!-- hints -->
+    <string name="hint0_title">Willkommen!</string>
+    <string name="hint0_text">Das Menü wird durch Berühren\ndes Hintergrunds angezeigt.</string>
+    <string name="hint1_title">Auto-Finish</string>
+    <string name="hint1_text">Mit der Zielflagge wird\ndas Spiel automatisch\nzu Ende gespielt.</string>
+    <string name="hint2_title">Zurück</string>
+    <string name="hint2_text">Mit diesem Menüeintrag kann\nder letzte Zug rückgängig\ngemacht werden.</string>
+    <string name="close">Schließen</string>
+
+    <!-- settings -->
+    <string name="settings_gamebg">Hintergrund Spiel</string>
+    <string name="settings_cardbg">Rückseite Karte</string>
+    <string name="settings_select_picture">Bild auswählen</string>
+    <string name="settings_full_screen_title">Vollbild</string>
+    <string name="settings_showing_status_bar">Statusleiste wird angezeigt (kleinere Karten)</string>
+    <string name="settings_using_full_screen">Anzeige in Vollbild (große Karten)</string>
+    <string name="settings_using_default">Standard</string>
+    <string name="settings_using_selected_image">Selektiertes Bild</string>
+    <string name="settings_custom_cardbg">Eigene Kartenrückseite</string>
+    <string name="settings_custom_gamebg">Eigener Spielhintergrund</string>
+    <string name="settings_left_hand_off">Kartenstapel ist auf der rechten Seite</string>
+    <string name="settings_left_hand_on">Kartenstapel ist auf der linken Seite</string>
+    <string name="settings_left_hand_title">Linke Hand</string>
+    <string name="settings_draw_three_off">Eine Karte umdrehen</string>
+    <string name="settings_draw_three_on">Drei Karten umdrehen</string>
+    <string name="settings_draw_three_title">Drei umdrehen</string>
+
+    <!-- AppRater -->
+    <string name="app_rater_title">Solitaire bewerten</string>
+    <string name="app_rater_explanation">Gefällt Dir Solitaire? Wir wären Dir sehr dankbar, wenn Du unser Spiel auf Google Play bewertest. Danke für die Unterstützung!</string>
+    <string name="app_rater_button_now">Bewerten</string>
+    <string name="app_rater_button_later">Später</string>
+    <string name="app_rater_button_never">Nein, danke</string>
+
+</resources>

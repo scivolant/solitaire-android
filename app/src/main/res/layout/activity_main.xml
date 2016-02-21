@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.droidcluster.solitaire.GameView
+        android:id="@+id/effectsView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <!--
+        comment in when implementing smooth background change
+        <ImageView
+            android:id="@+id/gameBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        -->
+
+        <include
+            android:id="@+id/winView"
+            layout="@layout/win_view"
+            android:visibility="invisible" />
+
+        <include
+            android:id="@+id/scoreView"
+            layout="@layout/score_view"
+            android:visibility="visible" />
+    </com.droidcluster.solitaire.GameView>
+
+    <include
+        android:id="@+id/menuView"
+        layout="@layout/menu_view"
+        android:visibility="invisible" />
+
+    <include
+        android:id="@+id/statsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        layout="@layout/stats_view"
+        android:visibility="invisible" />
+
+    <include
+        android:id="@+id/hintView"
+        layout="@layout/hint_view"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/welcomeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black" >
+
+        <ImageView
+            android:id="@+id/welcomeLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/welcomeTitle"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alpha="0"
+            android:src="@drawable/title" />
+    </FrameLayout>
+
+</FrameLayout>

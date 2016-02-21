@@ -1,0 +1,13 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_card_background_enable"
+        android:summaryOff="@string/settings_using_default"
+        android:summaryOn="@string/settings_using_selected_image"
+        android:title="@string/settings_custom_cardbg" />
+    <Preference
+        android:key="@string/pref_card_background"
+        android:title="@string/settings_select_picture" />
+
+</PreferenceScreen>

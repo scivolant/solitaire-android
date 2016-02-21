@@ -1,0 +1,42 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="winTextStyle">
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="menuTextStyle">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <!-- 
+        <item name="android:background">@drawable/win_view_row_bg</item>
+         -->
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="draw3_button_style">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:background">@drawable/draw3_button_bg</item>
+        <!-- 
+        <item name="android:background">@android:color/white</item>
+         -->
+    </style>
+
+</resources>
