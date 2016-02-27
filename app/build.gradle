@@ -25,7 +25,7 @@ android {
     }
     signingConfigs {
         release {
-            storeFile "/home/jenkins/googleplay.keystore"
+            storeFile file("/home/jenkins/googleplay.keystore")
             storePassword System.getenv("KEYSTORE_PASSWORD")
             keyAlias "release"
             keyPassword System.getenv("KEY_PASSWORD")
