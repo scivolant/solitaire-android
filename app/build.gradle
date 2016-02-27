@@ -31,6 +31,11 @@ android {
             keyPassword System.getenv("KEY_PASSWORD")
         }
     }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
 }
 
 dependencies {
