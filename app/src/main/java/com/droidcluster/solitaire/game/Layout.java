@@ -1,10 +1,8 @@
 package com.droidcluster.solitaire.game;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 
 import com.droidcluster.solitaire.model.Deck;
 import com.droidcluster.solitaire.model.Table;
@@ -40,7 +38,7 @@ public class Layout {
     public Bitmap gameBackground;
     public final Bitmap[] suits = new Bitmap[4];
 
-    public void initLayout(final int width, final int height, Settings settings, Context context) {
+    public void initLayout(final int width, final int height, Settings settings) {
         Layout layout = this;
         layout.availableSize.x = width;
         layout.availableSize.y = height;

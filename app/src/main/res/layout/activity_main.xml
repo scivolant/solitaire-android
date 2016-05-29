@@ -56,7 +56,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo" />
+            android:src="@drawable/splash" />
 
         <ImageView
             android:id="@+id/welcomeTitle"
