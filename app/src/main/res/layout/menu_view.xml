@@ -126,7 +126,7 @@
             android:layout_height="@dimen/menu_size"
             android:layout_marginLeft="1dp"
             android:background="@android:color/white"
-            android:src="@drawable/ic_launcher" />
+            android:src="@mipmap/ic_launcher" />
     </LinearLayout>
 
 </LinearLayout>

@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
             viewTreeObserver.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    welcomeController.getWelcomeAnimation().start();
+                    //welcomeController.getWelcomeAnimation().start();
                     menuManager2 = new MenuManager(MainActivity.this);
                     effectsView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 
