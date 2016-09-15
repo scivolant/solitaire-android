@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     private FrameLayout effectsView;
     private Table table;
     private final Layout layout = new Layout();
-    private MenuManager menuManager2;
+    private MenuController menuController;
     private StatsManager statsManager;
     private Mover mover;
     private final GameTimer timer = new GameTimer();
@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
                 @Override
                 public void onGlobalLayout() {
                     //welcomeController.getWelcomeAnimation().start();
-                    menuManager2 = new MenuManager(MainActivity.this);
+                    menuController = new MenuController(MainActivity.this);
                     effectsView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 
                     new InitTask(MainActivity.this).execute();
@@ -152,8 +152,8 @@ public class MainActivity extends Activity {
         return statsManager;
     }
 
-    public MenuManager getMenuManager() {
-        return menuManager2;
+    public MenuController getMenuManager() {
+        return menuController;
     }
 
     public Mover getMover() {

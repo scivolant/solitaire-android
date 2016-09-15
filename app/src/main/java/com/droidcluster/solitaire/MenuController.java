@@ -24,7 +24,7 @@ import com.droidcluster.solitaire.model.IMove2;
 import com.droidcluster.solitaire.model.Table;
 import com.droidcluster.solitaire.util.TouchHandler2;
 
-public class MenuManager {
+public class MenuController {
 
     private static final float ACTIVE_ALPHA = 0.5f;
     private static final float INACTIVE_ALPHA = 1f;
@@ -33,6 +33,8 @@ public class MenuManager {
     private final View buttonsView;
     private final View btnReplay;
     private final View menuView;
+    private final View leftMenu;
+    private final View rightMenu;
     private final View scoreView;
 
     private final View btnSettings;
@@ -50,10 +52,12 @@ public class MenuManager {
     private boolean showingWinMenu;
     private boolean disableMenu;
 
-    public MenuManager(MainActivity mainActivity) {
+    public MenuController(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
 
         menuView = mainActivity.findViewById(R.id.menuView);
+        leftMenu = menuView.findViewById(R.id.menu_left);
+        rightMenu = menuView.findViewById(R.id.menu_right);
         buttonsView = menuView.findViewById(R.id.menu_buttons);
         gameSubmenu = menuView.findViewById(R.id.game_submenu);
         scoreView = mainActivity.findViewById(R.id.scoreView);
@@ -79,14 +83,37 @@ public class MenuManager {
     private void addListeners() {
         // attach to background
         View gameBackground = mainActivity.findViewById(R.id.effectsView);
-        gameBackground.setOnClickListener(new OnClickListener() {
+        gameBackground.setOnTouchListener(new TouchHandler2() {
+            private final int SWIPE_TOLERANCE = (int) mainActivity.getResources().getDimension(R.dimen.activity_horizontal_margin);
+            private int dragStartX = -1;
+            private int dragX;
 
             @Override
-            public void onClick(View v) {
+            protected void click(int x, int y) {
                 if (showingWinMenu || disableMenu) {
                     return;
                 }
                 toggleMenu();
+            }
+
+            @Override
+            protected void dragStart(int x, int y) {
+                if(x < SWIPE_TOLERANCE) {
+                    dragStartX = x;
+                }
+            }
+
+            @Override
+            protected void drag(int x, int y) {
+                dragX = x;
+            }
+
+            @Override
+            protected void dragEnd() {
+                if(dragStartX > 0 && dragX > SWIPE_TOLERANCE + dragStartX) {
+                    toggleMenu();
+                }
+                dragStartX = -1;
             }
         });
 

@@ -9,6 +9,8 @@ import android.graphics.Point;
 import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.Typeface;
+import android.renderscript.Type;
 
 import com.droidcluster.solitaire.R;
 import com.droidcluster.solitaire.game.Layout;
@@ -64,7 +66,9 @@ public class CardRenderer extends Renderer {
                 layout.cardSize.y, new int[] { 0x00000000, 0x40000000 }, positions, Shader.TileMode.CLAMP));
 
         cardTextBlackPaint.setTextSize(layout.fontSize);
+        cardTextBlackPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         cardTextRedPaint.setTextSize(layout.fontSize);
+        cardTextRedPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
         foundationPaint.setTextSize(layout.fontSize);
     }
