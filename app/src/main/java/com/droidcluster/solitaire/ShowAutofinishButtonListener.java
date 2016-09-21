@@ -38,6 +38,9 @@ public class ShowAutofinishButtonListener implements WhiteboardListener {
             }
 
             Animator hideMenu = mainActivity.getMenuManager().hideMenu();
+            if(hideMenu == null) {
+                return;
+            }
             hideMenu.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationCancel(Animator animation) {
@@ -50,7 +53,6 @@ public class ShowAutofinishButtonListener implements WhiteboardListener {
                 }
             });
             hideMenu.start();
-            return;
         }
 
         if (event == Event.GAME_STARTED) {

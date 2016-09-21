@@ -103,7 +103,9 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
         if (layout.gameBackground == null) {
             return;
         }
-        layout.gameBackground = layout.gameBackground.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap copy = layout.gameBackground.copy(Bitmap.Config.ARGB_8888, true);
+        ImageLoader.recycle(layout.gameBackground);
+        layout.gameBackground = copy;
         Canvas bgCanvas = new Canvas(layout.gameBackground);
         for (int i = 0; i < Table.FOUNDATION_DECKS_COUNT; i++) {
             cardRenderer.drawFoundationSpot(layout.deckLocations[i], bgCanvas);
@@ -263,6 +265,8 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
                 decorateGameBackground();
                 effectsView.setBackgroundDrawable(new BitmapDrawable(mainActivity.getResources(),
                         layout.gameBackground));
+                ImageLoader.recycle(layout.gameBackground);
+                layout.gameBackground = null;
                 mainActivity.getMover().restoreTableState();
             }
         }.execute(true, false);

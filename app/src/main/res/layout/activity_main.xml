@@ -21,8 +21,7 @@
 
     <include
         android:id="@+id/menuView"
-        layout="@layout/menu_view"
-        android:visibility="invisible" />
+        layout="@layout/menu_view" />
 
     <include
         android:id="@+id/statsView"

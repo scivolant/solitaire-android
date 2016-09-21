@@ -87,7 +87,9 @@ public class ImageLoader {
             reqHeight = (int) (((float) reqWidth / b.getWidth()) * b.getHeight());
         }
 
-        return Bitmap.createScaledBitmap(b, reqWidth, reqHeight, false);
+        Bitmap result = Bitmap.createScaledBitmap(b, reqWidth, reqHeight, false);
+        recycle(b);
+        return result;
     }
 
     private static Bitmap streamToBackgroundImage(InputStream is, int reqWidth, int reqHeight) throws IOException {
@@ -116,7 +118,9 @@ public class ImageLoader {
         Bitmap decodedRegion = decoder.decodeRegion(rect, o);
 
         if (decodedRegion != null) {
-            return Bitmap.createScaledBitmap(decodedRegion, reqWidth, reqHeight, false);
+            Bitmap result = Bitmap.createScaledBitmap(decodedRegion, reqWidth, reqHeight, false);
+            recycle(decodedRegion);
+            return result;
         }
 
         return null;
@@ -185,7 +189,14 @@ public class ImageLoader {
 
         paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
+        recycle(bitmap);
 
         return output;
+    }
+
+    public static void recycle(Bitmap bitmap) {
+        if(bitmap != null && !bitmap.isRecycled()) {
+            bitmap.recycle();
+        }
     }
 }

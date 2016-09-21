@@ -100,7 +100,7 @@ public class ShowHintsListener implements WhiteboardListener {
             @Override
             protected void click(int x, int y) {
                 hideHint();
-                mainActivity.getMenuManager().showMenu();
+                mainActivity.getMenuManager().showLeftMenu();
             }
         });
     }

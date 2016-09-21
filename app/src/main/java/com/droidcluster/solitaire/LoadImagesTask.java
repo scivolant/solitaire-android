@@ -1,11 +1,13 @@
 package com.droidcluster.solitaire;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.droidcluster.solitaire.game.Layout;
 import com.droidcluster.solitaire.game.Settings;
 import com.droidcluster.solitaire.util.ImageCache;
+import com.droidcluster.solitaire.util.ImageLoader;
 
 public class LoadImagesTask extends AsyncTask<Boolean, String, String> {
     private static final String GAME_BG_PREFIX = "game_bg_";
@@ -29,13 +31,18 @@ public class LoadImagesTask extends AsyncTask<Boolean, String, String> {
         int cornerRadius = layout.cardRadius.x;
 
         // game background
+        Bitmap trash = layout.gameBackground;
         layout.gameBackground = cache.getImage(settings.gameBackground, R.drawable.gamebg, GAME_BG_PREFIX,
                 layout.availableSize.x, layout.availableSize.y, cornerRadius);
+        ImageLoader.recycle(trash);
 
         // card background
+        trash = layout.cardBackground;
         layout.cardBackground = cache.getImage(settings.cardBackground, R.drawable.cardbg, CARD_BG_PREFIX,
                 layout.cardSize.x, layout.cardSize.y, cornerRadius);
+        ImageLoader.recycle(trash);
 
         return "ok";
     }
+
 }
