@@ -24,20 +24,21 @@ public class ShowAutofinishButtonListener implements WhiteboardListener {
                 if (!offeredAutofinish) {
                     offeredAutofinish = true;
                     actionsShowing = 0;
-                    if (mainActivity.getStorage().isHintSeen(ShowHintsListener.HINT_AUTOFINISH)) {
-                        // if the hint is to be shown, autofinish will be offered when the hint closes
-                        mainActivity.getMenuManager().showAutofinishMenu();
-                        return;
-                    } else {
-                        Whiteboard.post(Event.OFFERED_AUTOFINISH);
-                    }
+                    mainActivity.getMenuController().updateMenu();
+                    mainActivity.getEffectsView().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mainActivity.getMenuController().showAutofinishMenu();
+                        }
+                    });
+                    Whiteboard.post(Event.OFFERED_AUTOFINISH);
                 } else if (actionsShowing < 3) {
                     actionsShowing++;
                     return;
                 }
             }
 
-            Animator hideMenu = mainActivity.getMenuManager().hideMenu();
+            Animator hideMenu = mainActivity.getMenuController().hideMenu();
             if(hideMenu == null) {
                 return;
             }
@@ -49,7 +50,7 @@ public class ShowAutofinishButtonListener implements WhiteboardListener {
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mainActivity.getMenuManager().updateMenu();
+                    mainActivity.getMenuController().updateMenu();
                 }
             });
             hideMenu.start();

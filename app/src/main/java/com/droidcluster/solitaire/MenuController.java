@@ -10,9 +10,7 @@ import android.animation.ObjectAnimator;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
-import android.support.v7.widget.DecorContentParent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -47,8 +45,6 @@ public class MenuController {
     private final TextView btnNewGame;
     private final View btnDraw1;
     private final View btnDraw3;
-    private final View titleDraw3;
-    private final View titleGame;
     private final int animTime;
 
     private View menuVisible;
@@ -60,22 +56,20 @@ public class MenuController {
         animTime = mainActivity.getResources().getInteger(android.R.integer.config_mediumAnimTime);
 
         menuView = mainActivity.findViewById(R.id.menuView);
-        leftMenu = menuView.findViewById(R.id.leftMenu);
-        rightMenu = menuView.findViewById(R.id.rightMenu);
+        leftMenu = menuView.findViewById(R.id.menu_left);
+        rightMenu = menuView.findViewById(R.id.menu_right);
         gameSubmenu = menuView.findViewById(R.id.game_submenu);
         scoreView = mainActivity.findViewById(R.id.scoreView);
 
-        btnReplay = menuView.findViewById(R.id.menu_replay_btn);
+        btnReplay = menuView.findViewById(R.id.menu_replay);
         btnSettings = menuView.findViewById(R.id.menu_settings_btn);
         btnStats = menuView.findViewById(R.id.menu_stats_btn);
         btnAutofinish = menuView.findViewById(R.id.menu_autofinish_btn);
         btnUndo = menuView.findViewById(R.id.menu_undo_btn);
         btnGame = (ImageView) menuView.findViewById(R.id.menu_game_btn);
-        btnNewGame = (TextView) menuView.findViewById(R.id.menu_new_game_btn);
-        btnDraw1 = menuView.findViewById(R.id.menu_draw1_btn);
-        btnDraw3 = menuView.findViewById(R.id.menu_draw3_btn);
-        titleDraw3 = menuView.findViewById(R.id.menu_draw3_title);
-        titleGame = menuView.findViewById(R.id.menu_game_title);
+        btnNewGame = (TextView) menuView.findViewById(R.id.menu_new_game);
+        btnDraw1 = menuView.findViewById(R.id.menu_draw1);
+        btnDraw3 = menuView.findViewById(R.id.menu_draw3);
 
         addListeners();
         updateDraw3().start();
@@ -86,7 +80,7 @@ public class MenuController {
 
     private void addListeners() {
         // attach to background
-        View gameBackground = mainActivity.findViewById(R.id.effectsView);
+        final View gameBackground = mainActivity.findViewById(R.id.effectsView);
         gameBackground.setOnTouchListener(new TouchHandler2() {
             private final int SWIPE_TOLERANCE = 2* (int) mainActivity.getResources().getDimension(R.dimen.activity_horizontal_margin);
             private int dragStartX = -1;
@@ -157,9 +151,20 @@ public class MenuController {
             @Override
             protected void click(int x, int y) {
                 if (gameSubmenu.getVisibility() == View.GONE) {
+                    gameSubmenu.setAlpha(0);
                     gameSubmenu.setVisibility(View.VISIBLE);
+                    gameSubmenu.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            gameSubmenu.setX(rightMenu.getX() - gameSubmenu.getWidth()
+                                    - mainActivity.getResources().getDimension(R.dimen.activity_horizontal_margin));
+                            gameSubmenu.setY(Math.max(0, rightMenu.getY() + btnGame.getHeight() - gameSubmenu.getHeight()));
+                            gameSubmenu.setAlpha(1);
+                        }
+                    });
                 } else {
                     gameSubmenu.setVisibility(View.GONE);
+                    gameSubmenu.setAlpha(0);
                 }
             }
         });
@@ -235,14 +240,16 @@ public class MenuController {
         btnReplay.setVisibility(View.GONE);
         btnDraw1.setVisibility(View.GONE);
         btnDraw3.setVisibility(View.GONE);
-        titleDraw3.setVisibility(View.GONE);
-        titleGame.setVisibility(View.GONE);
-        // btnNewGame.setBackgroundResource(R.drawable.button_light_bg);
-        // btnNewGame.setTextColor(mainActivity.getResources().getColor(R.color.textColor));
-        // gameSubmenu.setBackgroundResource(0);
         menuView.setAlpha(0);
         menuView.setVisibility(View.VISIBLE);
 
+        gameSubmenu.post(new Runnable() {
+            @Override
+            public void run() {
+                gameSubmenu.setX((mainActivity.getLayout().availableSize.x - gameSubmenu.getWidth()) / 2);
+                gameSubmenu.setY(mainActivity.getLayout().availableSize.y - gameSubmenu.getHeight());
+            }
+        });
         ObjectAnimator anim = ObjectAnimator.ofFloat(menuView, "alpha", 0, 1);
         anim.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -267,8 +274,6 @@ public class MenuController {
         btnReplay.setVisibility(table.getHistory().isEmpty() ? View.GONE : View.VISIBLE);
         btnDraw1.setVisibility(View.VISIBLE);
         btnDraw3.setVisibility(View.VISIBLE);
-        titleDraw3.setVisibility(View.VISIBLE);
-        titleGame.setVisibility(View.VISIBLE);
 
         if(mainActivity.getSolver().canAutoComplete(table)) {
             btnAutofinish.setAlpha(1);
@@ -285,6 +290,11 @@ public class MenuController {
     }
 
     private void hideItemNow(final View item) {
+        if(menuVisible == null) {
+            item.setVisibility(View.GONE);
+            return;
+        }
+
         Animator fadeOut = ObjectAnimator.ofFloat(item, "alpha", 1, 0);
         fadeOut.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -321,12 +331,16 @@ public class MenuController {
         showMenu(leftMenu);
     }
 
+    public void showRightMenu() {
+        showMenu(rightMenu);
+    }
+
     public void showMenu(final View menu) {
         ObjectAnimator moveIn;
-        if("left".equals(menu.getTag(R.id.direction))) {
+        if(menu.getId() == R.id.menu_left) {
             moveIn = ObjectAnimator.ofFloat(menu, "translationX", menu.getTranslationX(), 0);
         } else {
-            moveIn = ObjectAnimator.ofFloat(menu, "translationY", menu.getTranslationY(), 0);
+            moveIn = ObjectAnimator.ofFloat(menu, "translationY", menu.getHeight(), 0);
         }
 
         moveIn.setDuration(animTime);
@@ -364,7 +378,7 @@ public class MenuController {
         //final View menu = rightMenu;
 
         ObjectAnimator moveOut;
-        if("left".equals(menu.getTag(R.id.direction))) {
+        if(menu.getId() == R.id.menu_left) {
             moveOut = ObjectAnimator.ofFloat(menu, "translationX", 0, -menu.getWidth());
         } else {
             moveOut = ObjectAnimator.ofFloat(menu, "translationY", menu.getTranslationY(), menu.getHeight());
@@ -381,10 +395,10 @@ public class MenuController {
             @Override
             public void onAnimationStart(Animator animation) {
                 menuVisible = null;
+                gameSubmenu.setVisibility(View.GONE);
             }
             @Override
             public void onAnimationEnd(Animator animation) {
-                gameSubmenu.setVisibility(View.GONE);
                 menu.setVisibility(View.GONE);
                 if (!hideScore) {
                     scoreView.setVisibility(View.VISIBLE);
@@ -403,7 +417,12 @@ public class MenuController {
         btnStats.setVisibility(View.INVISIBLE);
         btnUndo.setVisibility(View.INVISIBLE);
 
-        showMenu(rightMenu);
+        menuView.post(new Runnable() {
+            @Override
+            public void run() {
+                showMenu(rightMenu);
+            }
+        });
     }
 
     private void autofinish() {
@@ -429,7 +448,7 @@ public class MenuController {
         autoFinish.start();
     }
 
-    private void newGame() {
+    public void newGame() {
         Table table = mainActivity.getTable();
         showingWinMenu = false;
 
@@ -499,5 +518,9 @@ public class MenuController {
         reset.setInterpolator(new DecelerateInterpolator());
         disableMenu = true;
         reset.start();
+    }
+
+    public boolean isShowingWinMenu() {
+        return showingWinMenu;
     }
 }

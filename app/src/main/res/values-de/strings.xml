@@ -39,13 +39,10 @@
     <string name="time">Zeit:</string>
 
     <!-- hints -->
-    <string name="hint0_title">Willkommen!</string>
-    <string name="hint0_text">Das Menü wird durch Berühren\ndes Hintergrunds angezeigt.</string>
-    <string name="hint1_title">Auto-Finish</string>
-    <string name="hint1_text">Mit der Zielflagge wird\ndas Spiel automatisch\nzu Ende gespielt.</string>
-    <string name="hint2_title">Zurück</string>
-    <string name="hint2_text">Mit diesem Menüeintrag kann\nder letzte Zug rückgängig\ngemacht werden.</string>
-    <string name="close">Schließen</string>
+    <string name="hint0">Berühre den Hintergrund\nfür Optionen.</string>
+    <string name="hint1">Spiele zu Ende und Gewinne!</string>
+    <string name="hint2">Du kannst den letzten Zug\nrückgängig machen.</string>
+    <string name="hint3">Wische von links um\ndas Menü zu öffnen.</string>
 
     <!-- settings -->
     <string name="settings_gamebg">Hintergrund Spiel</string>

@@ -88,7 +88,9 @@ public class ImageLoader {
         }
 
         Bitmap result = Bitmap.createScaledBitmap(b, reqWidth, reqHeight, false);
-        recycle(b);
+        if(result != b) {
+            recycleChecked(b);
+        }
         return result;
     }
 
@@ -119,7 +121,8 @@ public class ImageLoader {
 
         if (decodedRegion != null) {
             Bitmap result = Bitmap.createScaledBitmap(decodedRegion, reqWidth, reqHeight, false);
-            recycle(decodedRegion);
+            recycleChecked(decodedRegion);
+            decoder.recycle();
             return result;
         }
 
@@ -189,12 +192,12 @@ public class ImageLoader {
 
         paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
-        recycle(bitmap);
+        recycleChecked(bitmap);
 
         return output;
     }
 
-    public static void recycle(Bitmap bitmap) {
+    public static void recycleChecked(Bitmap bitmap) {
         if(bitmap != null && !bitmap.isRecycled()) {
             bitmap.recycle();
         }

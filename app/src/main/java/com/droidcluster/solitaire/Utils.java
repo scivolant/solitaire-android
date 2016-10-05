@@ -22,7 +22,7 @@ public class Utils {
         effectGameWon.setStartDelay(1000);
 
         Animator anim = mainActivity.getStatsManager().showWinView(effectGameWon, mainActivity.getTable());
-        Animator anim1 = mainActivity.getMenuManager().showWinMenu();
+        Animator anim1 = mainActivity.getMenuController().showWinMenu();
 
         AnimatorSet set = new AnimatorSet();
         set.playTogether(anim, anim1);

@@ -34,13 +34,13 @@ public class LoadImagesTask extends AsyncTask<Boolean, String, String> {
         Bitmap trash = layout.gameBackground;
         layout.gameBackground = cache.getImage(settings.gameBackground, R.drawable.gamebg, GAME_BG_PREFIX,
                 layout.availableSize.x, layout.availableSize.y, cornerRadius);
-        ImageLoader.recycle(trash);
+        ImageLoader.recycleChecked(trash);
 
         // card background
         trash = layout.cardBackground;
         layout.cardBackground = cache.getImage(settings.cardBackground, R.drawable.cardbg, CARD_BG_PREFIX,
                 layout.cardSize.x, layout.cardSize.y, cornerRadius);
-        ImageLoader.recycle(trash);
+        ImageLoader.recycleChecked(trash);
 
         return "ok";
     }

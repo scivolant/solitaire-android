@@ -42,14 +42,11 @@
     <string name="time">Time:</string>
     
     <!-- hints -->
-    <string name="hint0_title">Welcome!</string>
-    <string name="hint0_text">You can open and close the\nmenu by tapping anywhere\non the background.</string>
-    <string name="hint1_title">Auto-Finish</string>
-    <string name="hint1_text">Tap the finish flag menu\nto automatically finish\nand win the game.</string>
-    <string name="hint2_title">Undo</string>
-    <string name="hint2_text">Tap this menu item if\nyou want to undo your\nlast move.</string>
-    <string name="close">Close</string>
-    
+    <string name="hint0">Tap the background for\ngame options.</string>
+    <string name="hint1">Complete and win the game!</string>
+    <string name="hint2">You can undo your last move.</string>
+    <string name="hint3">Swipe from the left to\nopen the main menu.</string>
+
     <!-- settings -->
     <string name="settings_gamebg">Game Background</string>
     <string name="settings_cardbg">Card Design</string>

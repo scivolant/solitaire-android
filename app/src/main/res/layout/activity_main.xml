@@ -32,7 +32,6 @@
         android:visibility="invisible" />
 
     <include
-        android:id="@+id/hintView"
         layout="@layout/hint_view"
         android:visibility="gone" />
 

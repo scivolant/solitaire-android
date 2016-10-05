@@ -39,13 +39,10 @@
     <string name="time">Време:</string>
 
     <!-- hints -->
-    <string name="hint0_title">Добре дошли!</string>
-    <string name="hint0_text">Докоснете някъде фона,\nза да отворите менюто.</string>
-    <string name="hint1_title">Авт. довършване</string>
-    <string name="hint1_text">Чрез знамето можете да\nдовършите и спечелите\nиграта автоматично.</string>
-    <string name="hint2_title">Назад</string>
-    <string name="hint2_text">Използвайте стрелката,\nако искате да върнете\nпоследния ход.</string>
-    <string name="close">Затвори</string>
+    <string name="hint0">Докосни фона за опции.</string>
+    <string name="hint1">Довърши и спечели играта!</string>
+    <string name="hint2">Можеш да върнеш последния ход.</string>
+    <string name="hint3">Отвори менюто чрез плъзване отляво.</string>
 
     <!-- settings -->
     <string name="settings_gamebg">Фон на играта</string>

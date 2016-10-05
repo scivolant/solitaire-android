@@ -37,6 +37,7 @@ public class SettingsManager {
     }
 
     public void showSettings() {
-        mainActivity.startActivity(new Intent(mainActivity, SettingsActivity.class));
+        Intent intent = new Intent(mainActivity, SettingsActivity.class);
+        mainActivity.startActivity(intent);
     }
 }

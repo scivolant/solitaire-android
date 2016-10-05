@@ -328,7 +328,7 @@ public class Mover {
                 invalidatePreKitkat();
             }
         });
-        mainActivity.getMenuManager().updateMenu();
+        mainActivity.getMenuController().updateMenu();
 
         return set;
     }

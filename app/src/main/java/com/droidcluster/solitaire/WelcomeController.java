@@ -25,4 +25,8 @@ public class WelcomeController {
         });
         appear.start();
     }
+
+    public void hideWelcomeView() {
+        mainActivity.findViewById(R.id.welcomeView).setVisibility(View.GONE);
+    }
 }

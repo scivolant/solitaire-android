@@ -1,7 +1,6 @@
 package com.droidcluster.solitaire;
 
 import android.animation.Animator;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -104,7 +103,7 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
             return;
         }
         Bitmap copy = layout.gameBackground.copy(Bitmap.Config.ARGB_8888, true);
-        ImageLoader.recycle(layout.gameBackground);
+        ImageLoader.recycleChecked(layout.gameBackground);
         layout.gameBackground = copy;
         Canvas bgCanvas = new Canvas(layout.gameBackground);
         for (int i = 0; i < Table.FOUNDATION_DECKS_COUNT; i++) {
@@ -116,7 +115,7 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
         Whiteboard.addListener(new UpdateStatsListener(mainActivity), Whiteboard.Event.WON, Whiteboard.Event.LOST);
         Whiteboard.addListener(new ShowAutofinishButtonListener(mainActivity),
                 Whiteboard.Event.GAME_STARTED, Whiteboard.Event.MOVED);
-        Whiteboard.addListener(new ShowHintsListener(mainActivity), Whiteboard.Event.OFFERED_AUTOFINISH,
+        Whiteboard.addListener(new HintController(mainActivity), Whiteboard.Event.OFFERED_AUTOFINISH,
                 Whiteboard.Event.MOVED, Whiteboard.Event.GAME_STARTED);
         Whiteboard.addListener(new Whiteboard.WhiteboardListener() {
             @Override
@@ -128,8 +127,6 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
                         mainActivity.getEffectsView().setBackgroundDrawable(new BitmapDrawable(mainActivity.getResources(),
                                 mainActivity.getLayout().gameBackground));
                     }
-
-                    ;
                 }.execute(true, false);
             }
         }, Whiteboard.Event.GAME_BG_SET);
@@ -139,11 +136,14 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
                 new LoadImagesTask(mainActivity, mainActivity.getLayout(), mainActivity.getSettingsManager().getSettings()) {
                     @Override
                     protected void onPostExecute(String result) {
+                        decorateGameBackground();
+                        mainActivity.getEffectsView().setBackgroundDrawable(new BitmapDrawable(mainActivity.getResources(),
+                                mainActivity.getLayout().gameBackground));
+
                         int width = mainActivity.getLayout().cardSize.x + 2;
                         int height = mainActivity.getLayout().cardSize.y + 2;
                         Bitmap cardBack = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-                        cardRenderer.drawDeckCompact(new Deck(Card.H1), new Point(0, 0),
-                                new Canvas(cardBack));
+                        cardRenderer.drawDeckCompact(new Deck(Card.H1), new Point(0, 0), new Canvas(cardBack));
                         mainActivity.setCardBack(cardBack);
 
                         for (int i = 0; i < Card.values().length; i++) {
@@ -152,8 +152,6 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
                             }
                         }
                     }
-
-                    ;
                 }.execute(false, true);
             }
         }, Whiteboard.Event.CARD_BG_SET);
@@ -180,7 +178,7 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
         effectsView.addView(new View(mainActivity));
         effectsView
                 .setBackgroundDrawable(new BitmapDrawable(mainActivity.getResources(), layout.gameBackground));
-        mainActivity.getMenuManager().updateMenu();
+        mainActivity.getMenuController().updateMenu();
 
         int width = layout.cardSize.x + 2;
         int height = layout.cardSize.y + 2;
@@ -251,13 +249,17 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
     }
 
     private void handleLayoutChange() {
+        mainActivity.findViewById(R.id.hint).setVisibility(View.GONE);
+        mainActivity.findViewById(R.id.game_submenu).setVisibility(View.GONE);
         final Layout layout = mainActivity.getLayout();
         final View effectsView = mainActivity.getEffectsView();
         layout.initLayout(effectsView.getWidth(), effectsView.getHeight(),
                 mainActivity.getSettingsManager().getSettings());
         gameDeckView.setX(layout.deckLocations[Table.GAME_DECK_INDEX].x);
         gameDeckView.setY(layout.deckLocations[Table.GAME_DECK_INDEX].y);
+        mainActivity.getMover().restoreTableState();
         mainActivity.getStatsManager().centerWinViewContent();
+        effectsView.setBackgroundDrawable(null);
 
         new LoadImagesTask(mainActivity, layout, mainActivity.getSettingsManager().getSettings()) {
             @Override
@@ -265,10 +267,12 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
                 decorateGameBackground();
                 effectsView.setBackgroundDrawable(new BitmapDrawable(mainActivity.getResources(),
                         layout.gameBackground));
-                ImageLoader.recycle(layout.gameBackground);
-                layout.gameBackground = null;
-                mainActivity.getMover().restoreTableState();
             }
         }.execute(true, false);
+
+        if(mainActivity.getTable().isSolved()
+                && mainActivity.findViewById(R.id.winView).getVisibility() == View.VISIBLE) {
+            mainActivity.getMenuController().newGame();
+        }
     }
 }

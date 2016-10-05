@@ -52,8 +52,6 @@ public class JSONStorage implements Storage {
         try {
             json = serializer.table2json(table);
         } catch (JSONException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
             return;
         }
         json2file(json, getPersistenceFile());
@@ -185,6 +183,7 @@ public class JSONStorage implements Storage {
             new File(dir, "hint0.seen").isFile(), //
                     new File(dir, "hint1.seen").isFile(), //
                     new File(dir, "hint2.seen").isFile(), //
+                    new File(dir, "hint3.seen").isFile(), //
             };
         }
 

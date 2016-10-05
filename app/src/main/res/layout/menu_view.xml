@@ -7,82 +7,40 @@
         android:id="@+id/game_submenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@android:color/background_dark"
+        android:background="@android:color/black"
         android:orientation="vertical"
-        android:padding="10dp"
         android:visibility="gone" >
 
         <TextView
-            android:id="@+id/menu_draw3_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingBottom="10dp"
-            android:text="@string/menu_title_game_mode" />
-
-        <TextView
-            android:id="@+id/menu_draw1_btn"
+            android:id="@+id/menu_draw1"
             style="@style/menuTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/draw1"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:padding="10dp"
             android:text="@string/menu_draw1" />
 
         <TextView
-            android:id="@+id/menu_draw3_btn"
+            android:id="@+id/menu_draw3"
             style="@style/menuTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/draw3"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:padding="10dp"
             android:text="@string/menu_draw3" />
 
         <TextView
-            android:id="@+id/menu_game_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingBottom="10dp"
-            android:paddingTop="20dp"
-            android:text="@string/menu_title_actions" />
-
-        <TextView
-            android:id="@+id/menu_replay_btn"
+            android:id="@+id/menu_replay"
             style="@style/menuTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/menu_size"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
             android:text="@string/menu_replay" />
 
         <TextView
-            android:id="@+id/menu_new_game_btn"
+            android:id="@+id/menu_new_game"
             style="@style/menuTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/menu_size"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="1dp"
-            android:gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:text="@string/menu_new" />
+
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/leftMenu"
+        android:id="@+id/menu_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:orientation="vertical">
-        <tag android:id="@+id/direction" android:value="left" />
 
 
         <ImageView
@@ -104,12 +62,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/rightMenu"
+        android:id="@+id/menu_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:orientation="vertical" >
-        <tag android:id="@id/direction" android:value="down" />
 
         <ImageView
             android:id="@+id/menu_game_btn"
