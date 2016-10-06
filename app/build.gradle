@@ -8,8 +8,8 @@ android {
         applicationId "com.droidcluster.solitaire"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 32
-        versionName "1.32"
+        versionCode System.getenv("BUILD_NUMBER") ?: 1
+        versionName "1." + (System.getenv("BUILD_NUMBER") ?: 1)
     }
     buildTypes {
         release {
