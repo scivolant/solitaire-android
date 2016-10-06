@@ -106,10 +106,12 @@ public class MenuController {
 
             @Override
             protected void dragEnd() {
-                if(dragStartX < SWIPE_TOLERANCE && dragX - dragStartX > SWIPE_TOLERANCE) { // swiped right
-                    toggleMenu(leftMenu);
-                } else {
-                    hideMenuNow();
+                if(!disableMenu && !showingWinMenu) {
+                    if(dragStartX < SWIPE_TOLERANCE && dragX - dragStartX > SWIPE_TOLERANCE) { // swiped right
+                        toggleMenu(leftMenu);
+                    } else {
+                        hideMenuNow();
+                    }
                 }
                 dragStartX = -1;
             }
@@ -400,7 +402,7 @@ public class MenuController {
             @Override
             public void onAnimationEnd(Animator animation) {
                 menu.setVisibility(View.GONE);
-                if (!hideScore) {
+                if (!hideScore && menuVisible == null) {
                     scoreView.setVisibility(View.VISIBLE);
                 }
             }
@@ -440,7 +442,6 @@ public class MenuController {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                disableMenu = false;
                 Utils.showGameWonStuff(mainActivity);
             }
         });
