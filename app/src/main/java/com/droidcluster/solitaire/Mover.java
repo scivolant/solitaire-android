@@ -34,6 +34,7 @@ public class Mover {
     private final MainActivity mainActivity;
     private AnimatorSet activeWinAnimation;
     private Animator autofinishAnimation;
+    private Animator collectAnimation;
 
     public Mover(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -278,9 +279,17 @@ public class Mover {
         ArrayList<Animator> anims = new ArrayList<Animator>();
         ArrayList<Animator> openAnims = new ArrayList<Animator>();
 
+        Layout layout = mainActivity.getLayout();
+        int deckX = layout.deckLocations[Table.GAME_DECK_INDEX].x;
+        int deckY = layout.deckLocations[Table.GAME_DECK_INDEX].y;
+        for (int tag = 0; tag < Card.values().length; tag++) {
+            View cardView = mainActivity.getCardView(tag);
+            cardView.setX(deckX);
+            cardView.setY(deckY);
+        }
+
         for (int i = 0; i < Table.TABLEAU_DECKS_COUNT; i++) {
             Deck deck = mainActivity.getTable().getTableau()[i];
-            Layout layout = mainActivity.getLayout();
             Point endLoc = layout.deckLocations[Table.FOUNDATION_DECKS_COUNT + i];
             Point p = new Point(endLoc);
             ImageView lastImageView = null;
@@ -428,11 +437,17 @@ public class Mover {
         set.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
+                collectAnimation = animation;
                 mainActivity.getStatsManager().hideWinView().start();
                 Animator winAnim = activeWinAnimation;
                 if (winAnim != null) {
                     winAnim.cancel();
                 }
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                collectAnimation = null;
             }
         });
 
@@ -523,6 +538,9 @@ public class Mover {
 
         if(autofinishAnimation != null) {
             autofinishAnimation.end();
+        } else if(collectAnimation != null) {
+            collectAnimation.end();
+            return;
         }
 
         Deck[] decks = table.getAllDecksInternal();
