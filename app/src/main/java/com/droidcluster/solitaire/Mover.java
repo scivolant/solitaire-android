@@ -33,6 +33,7 @@ public class Mover {
 
     private final MainActivity mainActivity;
     private AnimatorSet activeWinAnimation;
+    private Animator autofinishAnimation;
 
     public Mover(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -520,6 +521,10 @@ public class Mover {
         Table table = mainActivity.getTable();
         Layout layout = mainActivity.getLayout();
 
+        if(autofinishAnimation != null) {
+            autofinishAnimation.end();
+        }
+
         Deck[] decks = table.getAllDecksInternal();
         for (int deckIndex = 0; deckIndex < decks.length; deckIndex++) {
             Deck deck = decks[deckIndex];
@@ -639,6 +644,18 @@ public class Mover {
 
         AnimatorSet set = new AnimatorSet();
         set.playTogether(anims);
+
+        set.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                autofinishAnimation = animation;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                autofinishAnimation = null;
+            }
+        });
 
         return set;
     }

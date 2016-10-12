@@ -238,26 +238,22 @@ public class MenuController {
     }
 
     public Animator showWinMenu() {
-        gameSubmenu.setVisibility(View.VISIBLE);
-        btnReplay.setVisibility(View.GONE);
-        btnDraw1.setVisibility(View.GONE);
-        btnDraw3.setVisibility(View.GONE);
-        menuView.setAlpha(0);
-        menuView.setVisibility(View.VISIBLE);
-
-        gameSubmenu.post(new Runnable() {
+        final View winMenu = mainActivity.findViewById(R.id.menu_new_game_win);
+        winMenu.setOnTouchListener(new TouchHandler2() {
             @Override
-            public void run() {
-                gameSubmenu.setX((mainActivity.getLayout().availableSize.x - gameSubmenu.getWidth()) / 2);
-                gameSubmenu.setY(mainActivity.getLayout().availableSize.y - gameSubmenu.getHeight());
+            protected void click(int x, int y) {
+                newGame();
             }
         });
-        ObjectAnimator anim = ObjectAnimator.ofFloat(menuView, "alpha", 0, 1);
+        winMenu.setTranslationY(0);
+        winMenu.setAlpha(0);
+        winMenu.setVisibility(View.VISIBLE);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(winMenu, "alpha", 0, 1);
         anim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
                 scoreView.setVisibility(View.GONE);
-                menuVisible = rightMenu;
+                menuVisible = winMenu;
                 showingWinMenu = true;
             }
         });

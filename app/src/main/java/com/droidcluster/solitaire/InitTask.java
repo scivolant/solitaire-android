@@ -269,10 +269,5 @@ public class InitTask extends AsyncTask<MainActivity, Void, Object> {
                         layout.gameBackground));
             }
         }.execute(true, false);
-
-        if(mainActivity.getTable().isSolved()
-                && mainActivity.findViewById(R.id.winView).getVisibility() == View.VISIBLE) {
-            mainActivity.getMenuController().newGame();
-        }
     }
 }

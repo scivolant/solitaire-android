@@ -31,6 +31,14 @@
         layout="@layout/stats_view"
         android:visibility="invisible" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:id="@+id/menu_new_game_win"
+        style="@style/menuTextStyle"
+        android:text="@string/menu_new"
+        android:visibility="gone"/>
+
     <include
         layout="@layout/hint_view"
         android:visibility="gone" />
