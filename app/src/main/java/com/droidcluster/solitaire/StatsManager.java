@@ -50,6 +50,7 @@ public class StatsManager {
     private final TextView gamesWonPercent;
 
     private ValueAnimator bestAnimation;
+    private Animator showWinViewAnimation;
 
     public StatsManager(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -205,6 +206,13 @@ public class StatsManager {
         alphaAnim.setDuration(mainActivity.getAnimationTimeMs());
         alphaAnim.addListener(new AnimatorListenerAdapter() {
             @Override
+            public void onAnimationStart(Animator animation) {
+                if (showWinViewAnimation != null) {
+                    showWinViewAnimation.end();
+                }
+            }
+
+            @Override
             public void onAnimationEnd(Animator animation) {
                 hideWinView = true;
                 if (bestAnimation != null) {
@@ -259,6 +267,7 @@ public class StatsManager {
             @Override
             public void onAnimationStart(Animator animation) {
                 hideWinView = false;
+                showWinViewAnimation = animation;
 
                 final int points = table.getPoints();
                 final int moves = table.getHistory().size();
@@ -321,6 +330,11 @@ public class StatsManager {
                     }
                 }.run();
 
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                showWinViewAnimation = null;
             }
         });
         return alphaAnim;

@@ -35,6 +35,7 @@ public class Mover {
     private AnimatorSet activeWinAnimation;
     private Animator autofinishAnimation;
     private Animator collectAnimation;
+    private Animator dealAnimation;
 
     public Mover(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -333,7 +334,13 @@ public class Mover {
         set.playSequentially(animSetXY, animSetOpen);
         set.addListener(new AnimatorListenerAdapter() {
             @Override
+            public void onAnimationStart(Animator animation) {
+                dealAnimation = animation;
+            }
+
+            @Override
             public void onAnimationEnd(Animator animation) {
+                dealAnimation = null;
                 updateGameDeck();
                 invalidatePreKitkat();
             }
@@ -542,6 +549,9 @@ public class Mover {
             collectAnimation.end();
             return;
         }
+        if (dealAnimation != null) {
+            dealAnimation.end();
+        }
 
         Deck[] decks = table.getAllDecksInternal();
         for (int deckIndex = 0; deckIndex < decks.length; deckIndex++) {
@@ -555,13 +565,17 @@ public class Mover {
                 cardView.setX(x);
                 cardView.setY(y);
 
-                boolean open = deck.getOpenCardsCount() > cardIndex;
-                mainActivity.setCardOpen(tag, open);
-                Bitmap bm = open ? mainActivity.getCardBitmap(tag) : mainActivity.getCardBack();
+                boolean revealed = deck.getOpenCardsCount() > cardIndex;
+                mainActivity.setCardOpen(tag, revealed);
+                Bitmap bm = revealed ? mainActivity.getCardBitmap(tag) : mainActivity.getCardBack();
                 cardView.setImageBitmap(bm);
 
                 if (Table.isInTableau(deckIndex)) {
-                    y += open ? layout.getPartiallyCoveredOpenCard() : layout.getPartiallyCoveredBackCard();
+                    y += revealed ? layout.getPartiallyCoveredOpenCard() : layout.getPartiallyCoveredBackCard();
+                }
+
+                if (revealed) {
+                    cardView.setRotationY(0);
                 }
             }
         }
