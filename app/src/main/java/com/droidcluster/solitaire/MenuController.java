@@ -50,6 +50,7 @@ public class MenuController {
     private View menuVisible;
     private boolean showingWinMenu;
     private boolean disableMenu;
+    private boolean disableToggle;
 
     public MenuController(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -305,6 +306,10 @@ public class MenuController {
     }
 
     public void toggleMenu(View menu) {
+        if(disableToggle) {
+            return;
+        }
+
         Animator hideMenu = hideMenu();
         if (hideMenu != null) {
             hideMenu.addListener(new AnimatorListenerAdapter() {
@@ -315,9 +320,11 @@ public class MenuController {
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
+                    disableToggle = false;
                     updateMenu();
                 }
             });
+            disableToggle = true;
             hideMenu.start();
         } else {
             updateMenu();
@@ -352,6 +359,17 @@ public class MenuController {
 
         AnimatorSet set = new AnimatorSet();
         set.playTogether(moveIn, fadeIn);
+        set.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                disableToggle = true;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                disableToggle = false;
+            }
+        });
         set.start();
         scoreView.setVisibility(View.GONE);
         menuVisible = menu;
